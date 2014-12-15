@@ -6,6 +6,8 @@ pushd x264
 
 ./configure --cross-prefix=arm-linux-androideabi- \
 --enable-pic \
---host=arm-linux 
+--host=arm-linux \
+--cross-prefix=arm-linux-androideabi- \
+--sysroot=../toolchain/sysroot/
 
 popd;popd

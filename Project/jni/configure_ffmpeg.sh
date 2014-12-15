@@ -46,7 +46,10 @@ $featureflags \
 --disable-demuxer=v4l2 \
 --disable-indev=v4l \
 --disable-indev=v4l2 \
+--sysroot=../toolchain/sysroot/ \
+--cross-prefix=arm-linux-androideabi- \
 --extra-cflags="-I../x264 -Ivideokit" \
---extra-ldflags="-L../x264" 
+--extra-libs="../toolchain/lib/gcc/arm-linux-androideabi/4.8/libgcc.a -lc -ldl" \
+--extra-ldflags="-L../x264"
 
 popd; popd
