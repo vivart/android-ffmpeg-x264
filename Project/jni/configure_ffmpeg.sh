@@ -20,20 +20,18 @@ fi
 pushd ffmpeg
 
 ./configure $DEBUG_FLAG --enable-cross-compile \
---arch=arm5te \
+--arch=$ARCH \
 --enable-armv5te \
 --target-os=linux \
 --disable-stripping \
 --prefix=../output \
 --disable-neon \
---enable-version3 --ar=arm-linux-androideabi-ar \
+--enable-version3 \
 --disable-shared \
 --enable-static \
 --enable-gpl \
 --enable-memalign-hack \
---cc=arm-linux-androideabi-gcc \
---ld=arm-linux-androideabi-ld \
---extra-cflags="-fPIC -DANDROID -D__thumb__ -mthumb -Wfatal-errors -Wno-deprecated" \
+--extra-cflags="-fPIC -DANDROID -Wfatal-errors -Wno-deprecated" \
 $featureflags \
 --disable-ffmpeg \
 --disable-ffplay \
@@ -46,10 +44,10 @@ $featureflags \
 --disable-demuxer=v4l2 \
 --disable-indev=v4l \
 --disable-indev=v4l2 \
---sysroot=../toolchain/sysroot/ \
---cross-prefix=arm-linux-androideabi- \
+--sysroot=$SYSROOT \
+--cross-prefix=$CROSS_PREFIX \
 --extra-cflags="-I../x264 -Ivideokit" \
---extra-libs="../toolchain/lib/gcc/arm-linux-androideabi/4.8/libgcc.a -lc -ldl" \
+--extra-libs="$LIBGCC_STATIC_LIB -lc -ldl" \
 --extra-ldflags="-L../x264"
 
 popd; popd

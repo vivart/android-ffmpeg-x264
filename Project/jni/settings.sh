@@ -18,11 +18,41 @@ if [[ ! -d $NDK ]]; then
   exit 1
 fi
 
-function current_dir {
-  echo "$(cd "$(dirname $0)"; pwd)"
+current_dir () {
+  echo $( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )
 }
 
-export PATH=$PATH:$NDK:$(current_dir)/toolchain/bin
+export ARCH=x86
+#export ARCH=x86_64
+#export ARCH=arm
+toolchain_dir=$(current_dir)/toolchain-$ARCH
+export PATH=$PATH:$NDK:$toolchain_dir/bin
+export SYSROOT=$toolchain_dir/sysroot/
+
+case "$ARCH" in
+    arm)
+        export CROSS_PREFIX=arm-linux-androideabi-
+        export CROSS_HOST=arm-linux
+        ;;
+
+    x86)
+        export CROSS_PREFIX=i686-linux-android-
+        export CROSS_HOST=i686-linux
+        ;;
+
+    x86_64)
+        export CROSS_PREFIX=x86_64-linux-android-
+        export CROSS_HOST=x86_64-linux
+        ;;
+
+    *)
+        echo "ERROR: Unsupported architecture $ARCH in settings.sh!"
+        exit -1
+esac
+
+toolchain_gcc=$toolchain_dir/bin/${CROSS_PREFIX}gcc
+export LIBGCC_STATIC_LIB=`$toolchain_gcc -print-libgcc-file-name`
+
 
 echo $PATH
 

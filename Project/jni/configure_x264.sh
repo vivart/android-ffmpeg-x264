@@ -4,10 +4,10 @@ pushd `dirname $0`
 
 pushd x264
 
-./configure --cross-prefix=arm-linux-androideabi- \
+./configure \
 --enable-pic \
---host=arm-linux \
---cross-prefix=arm-linux-androideabi- \
---sysroot=../toolchain/sysroot/
+--host=$CROSS_HOST \
+--cross-prefix=$CROSS_PREFIX \
+--sysroot=$SYSROOT
 
 popd;popd
