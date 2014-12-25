@@ -2,6 +2,9 @@
 pushd `dirname $0`
 . settings.sh
 
+# enable minimal featureset
+minimal_featureset = 0
+
 if [[ $minimal_featureset == 1 ]]; then
   echo "Using minimal featureset"
   featureflags="--disable-everything \
@@ -24,7 +27,7 @@ pushd ffmpeg
 --enable-armv5te \
 --target-os=linux \
 --disable-stripping \
---prefix=../output \
+--prefix=../out/$ARCH \
 --disable-neon \
 --enable-version3 \
 --disable-shared \
