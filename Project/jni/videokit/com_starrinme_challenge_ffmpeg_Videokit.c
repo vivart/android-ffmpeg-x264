@@ -2,7 +2,7 @@
 
 #include <android/log.h>
 #include "logjam.h"
-#include "uk_co_halfninja_videokit_Videokit.h"
+#include "com_starrinme_challenge_ffmpeg_Videokit.h"
 
 #include <stdlib.h>
 #include <stdbool.h>
@@ -21,7 +21,7 @@ jint JNI_OnLoad( JavaVM* vm, void* reserved )
 	return JNI_VERSION_1_6;
 }
 
-JNIEXPORT void JNICALL Java_uk_co_halfninja_videokit_Videokit_run(JNIEnv *env, jobject obj, jobjectArray args)
+JNIEXPORT jboolean JNICALL Java_com_starrinme_challenge_ffmpeg_Videokit_run(JNIEnv *env, jobject obj, jobjectArray args)
 {
 	int i = 0;
 	int argc = 0;
@@ -40,7 +40,7 @@ JNIEXPORT void JNICALL Java_uk_co_halfninja_videokit_Videokit_run(JNIEnv *env, j
 		}
 	}	
 
-	main(argc, argv);
+	int result = main(argc, argv);
 	
 	for(i=0;i<argc;i++)
 	{
@@ -48,4 +48,6 @@ JNIEXPORT void JNICALL Java_uk_co_halfninja_videokit_Videokit_run(JNIEnv *env, j
 	}
 	free(argv);
 	free(strr);
+	
+	return result == 0;
 }

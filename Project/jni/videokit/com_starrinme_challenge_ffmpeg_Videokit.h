@@ -2,17 +2,17 @@
 #include <jni.h>
 /* Header for class uk_co_halfninja_videokit_Videokit */
 
-#ifndef _Included_uk_co_halfninja_videokit_Videokit
-#define _Included_uk_co_halfninja_videokit_Videokit
+#ifndef _Included_com_starrinme_challenge_ffmpeg_Videokit
+#define _Included_com_starrinme_challenge_ffmpeg_Videokit
 #ifdef __cplusplus
 extern "C" {
 #endif
 /*
- * Class:     uk_co_halfninja_videokit_Videokit
+ * Class:     com_starrinme_challenge_ffmpeg_Videokit
  * Method:    run
  * Signature: ([Ljava/lang/String;)V
  */
-JNIEXPORT void JNICALL Java_uk_co_halfninja_videokit_Videokit_run
+JNIEXPORT jboolean JNICALL Java_com_starrinme_challenge_ffmpeg_Videokit_run
   (JNIEnv *, jobject, jobjectArray);
 
 #ifdef __cplusplus

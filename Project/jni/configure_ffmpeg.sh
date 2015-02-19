@@ -2,9 +2,6 @@
 pushd `dirname $0`
 . settings.sh
 
-# enable minimal featureset
-minimal_featureset = 0
-
 if [[ $minimal_featureset == 1 ]]; then
   echo "Using minimal featureset"
   featureflags="--disable-everything \
@@ -35,8 +32,10 @@ pushd ffmpeg
 --enable-gpl \
 --enable-memalign-hack \
 --extra-cflags="-fPIC -DANDROID -Wfatal-errors -Wno-deprecated" \
-$featureflags \
---disable-ffmpeg \
+--enable-libx264 \
+--enable-muxer=mp4 \
+--enable-encoder=libx264 \
+--enable-ffmpeg \
 --disable-ffplay \
 --disable-ffprobe \
 --disable-ffserver \
